@@ -14,8 +14,7 @@ class StatusItemManager {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let discordStatusMenuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
     private let connectItem = NSMenuItem(title: "Connect", action: #selector(StatusItemManager.connect(_:)), keyEquivalent: "c")
-    private let disconnectItem = NSMenuItem(title: "Disconnect", action: #selector(StatusItemManager.disconnect(_:)), keyEquivalent: "d")
-    private let reconnectItem = NSMenuItem(title: "Reconnect", action: #selector(StatusItemManager.reconnect(_:)), keyEquivalent: "r")
+    private let reconnectItem = NSMenuItem(title: "Reconnect", action: #selector(StatusItemManager.reconnect(_:)), keyEquivalent: "c")
     
     private init() {
         statusItem.button?.title = "Apple Music Presenti Status"
@@ -34,10 +33,9 @@ class StatusItemManager {
         connectItem.target = self
         menu.addItem(connectItem)
         
-        disconnectItem.target = self
-        menu.addItem(disconnectItem)
-        
         reconnectItem.target = self
+        reconnectItem.isAlternate = true
+        reconnectItem.keyEquivalentModifierMask = .option
         menu.addItem(reconnectItem)
         
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
@@ -70,9 +68,9 @@ class StatusItemManager {
     private func updateIcon() {
         statusItem.button?.image = NSImage(named: "StatusItem_\(isConnectedToPresenti ? iconState.imageSuffix : "disabled")")
         
-        disconnectItem.isEnabled = isConnectedToPresenti
+        connectItem.title = isConnectedToPresenti ? "Disconnect" : "Connect"
+        connectItem.action = isConnectedToPresenti ? #selector(disconnect(_:)) : #selector(connect(_:))
         reconnectItem.isEnabled = isConnectedToPresenti
-        connectItem.isEnabled = !isConnectedToPresenti
     }
     
     var isConnectedToPresenti = false {
