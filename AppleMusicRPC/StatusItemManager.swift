@@ -35,7 +35,7 @@ class StatusItemManager {
         
         reconnectItem.target = self
         reconnectItem.isAlternate = true
-        reconnectItem.keyEquivalentModifierMask = .option
+        reconnectItem.keyEquivalentModifierMask = [.command, .option]
         menu.addItem(reconnectItem)
         
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
