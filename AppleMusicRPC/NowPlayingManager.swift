@@ -98,6 +98,12 @@ class NowPlayingManager {
         
         return presence
     }
+    
+    func rescheduleReloadInterval() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: PreferencesManager.shared.reloadInterval, repeats: true) { timer in
+            self.updateState(force: false)
+        }
+    }
 }
 
 extension NowPlayingManager: PresentiRPCDelegate {
@@ -106,9 +112,8 @@ extension NowPlayingManager: PresentiRPCDelegate {
         DispatchQueue.main.async {
             StatusItemManager.shared.isConnectedToPresenti = true
             self.updateState(force: true)
-            self.timer = Timer.scheduledTimer(withTimeInterval: PreferencesManager.shared.reloadInterval, repeats: true) { timer in
-                self.updateState(force: false)
-            }
+            
+            self.rescheduleReloadInterval()
         }
     }
     
@@ -130,7 +135,7 @@ extension NowPlayingManager: PreferencesManagerDelegate {
     func reloadIntervalDidChange(interval: Double) {
         self.timer?.invalidate()
         DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(timeInterval: PreferencesManager.shared.reloadInterval, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
+            self.rescheduleReloadInterval()
         }
     }
     
