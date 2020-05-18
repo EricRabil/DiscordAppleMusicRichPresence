@@ -46,8 +46,6 @@ struct NowPlaying {
             let positionDiff = Int(position - lastPosition)
             let gap = dateDiff - positionDiff
             
-            print(abs(gap))
-            
             let didChange = abs(gap) > 2
             
             return didChange

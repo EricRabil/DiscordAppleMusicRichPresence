@@ -89,7 +89,6 @@ class PreferencesManager {
             return enabled
         }
         set {
-            print(newValue)
             UserDefaults.standard.set(newValue, forKey: "gradient-enabled")
             self.delegate?.gradientEnabledDidChange(enabled: newValue)
         }

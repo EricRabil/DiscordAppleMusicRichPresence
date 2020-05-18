@@ -50,7 +50,6 @@ class PresentiConnection {
         self.delegate = delegate
         
         listen(.pong, { data in
-            print("[Presenti] pong")
             self.deferPing()
         })
         

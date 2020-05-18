@@ -27,7 +27,7 @@ class NowPlayingManager {
     
     @objc private func updateState(force: Bool = false) {
         if NowPlaying.changed == false {
-            print("no change. force: \(force)")
+            print("[NowPlayingManager] No changes detected – force: \(force)")
             if force == false { return }
         }
         
@@ -102,8 +102,7 @@ class NowPlayingManager {
 
 extension NowPlayingManager: PresentiRPCDelegate {
     func rpcDidConnect() {
-        print("Connected to Presenti!")
-        print(PreferencesManager.shared.reloadInterval)
+        print("[NowPlayingManager] Connected to Presenti!")
         DispatchQueue.main.async {
             StatusItemManager.shared.isConnectedToPresenti = true
             self.updateState(force: true)
@@ -114,7 +113,7 @@ extension NowPlayingManager: PresentiRPCDelegate {
     }
     
     func rpcDidDisconnect() {
-        print("Lost Presenti connection :(")
+        print("[NowPlayingManager] Lost Presenti connection :(")
         DispatchQueue.main.async {
             StatusItemManager.shared.isConnectedToPresenti = false
             self.timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.setup), userInfo: nil, repeats: true)
