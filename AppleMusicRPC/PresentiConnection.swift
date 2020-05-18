@@ -130,7 +130,7 @@ class PresentiConnection {
     
     func deferPing() {
         DispatchQueue.global(qos: .background).async {
-            Timer.scheduledTimer(withTimeInterval: 5, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 30, repeats: false) { _ in
                 self.send(.ping)
             }
             RunLoop.current.run()
