@@ -27,6 +27,11 @@
     return track.properties;
 }
 
+- (NSDictionary*) currentTrackArtwork {
+    MusicTrack *track = [app currentTrack];
+    return [track artworks].firstObject.properties;
+}
+
 - (BOOL)isPaused {
     return app.playerState == MusicEPlSPaused;
 }

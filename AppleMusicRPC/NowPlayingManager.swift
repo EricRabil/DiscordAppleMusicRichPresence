@@ -11,23 +11,33 @@ import SwordRPC
 
 class NowPlayingManager {
     static let shared = NowPlayingManager()
-    let rpc = SwordRPC(appId: "711031191112908851", autoRegister: false)
+    let rpc = PresentiConnection()
     
     private init() {
         rpc.delegate = self
+        PreferencesManager.shared.delegate = self
     }
     
     @objc func setup() {
         guard !rpc.isConnected else { return }
+        guard let token = PreferencesManager.shared.token else { return }
+        rpc.token = token
         rpc.connect()
     }
     
     @objc private func updateState() {
+        if NowPlaying.changed == false {
+            print("no change")
+            return
+        }
+        
         let item = NowPlaying.current
         
         StatusItemManager.shared.iconState = .from(isPaused: item?.isPaused)
         
-        let presence = getPresence(forItem: item)
+        guard let presence = getPresence(forItem: item) else {
+            return
+        }
         rpc.setPresence(presence)
     }
     
@@ -35,50 +45,84 @@ class NowPlayingManager {
         didSet { oldValue?.invalidate() }
     }
     
-    func getPresence(forItem item: NowPlaying?) -> RichPresence? {
+    func getPresence(forItem item: NowPlaying?) -> PresentiPresence? {
         guard let item = item else { return nil }
         
-        var presence = RichPresence()
+        var presence = PresentiPresence()
         
-        presence.details = item.title
+//        presence.details = item.title
         let playbackStateText = item.isPaused ? "Paused" : "Playing"
-        
+//
         let trackInfoSecondaryLineItems = [item.artist, item.album].lazy
                             .compactMap({ $0 })
                             .filter({ !$0.isEmpty })
+//
+//        presence.state =  trackInfoSecondaryLineItems.isEmpty ? playbackStateText : trackInfoSecondaryLineItems.joined(separator: " — ")
+//
+//        if !item.isPaused {
+//            presence.timestamps.start = item.startDate
+//        }
+//
+//        presence.assets.largeImage = "music"
+//        presence.assets.largeText = "Music app"
+//
+//        presence.assets.smallImage = item.isPaused ? "paused" : "playing"
+//        presence.assets.smallText = playbackStateText
         
-        presence.state =  trackInfoSecondaryLineItems.isEmpty ? playbackStateText : trackInfoSecondaryLineItems.joined(separator: " — ")
+        presence.id = "com.aydenanderic.applemusic"
+        
+        presence.title = "Listening to Music"
+        presence.isPaused = item.isPaused
+        
+        var texts = [PresentiText]()
+        texts.append(PresentiText(text: trackInfoSecondaryLineItems.isEmpty ? playbackStateText : trackInfoSecondaryLineItems.joined(separator: " — ")))
         
         if !item.isPaused {
-            presence.timestamps.start = item.startDate
+//            presence.timestamps = PresentiTimeRange(start: item.startDate)
         }
         
-        presence.assets.largeImage = "music"
-        presence.assets.largeText = "Music app"
+        if let artwork = item.artwork {
+            presence.image = PresentiImage(src: artwork, link: nil)
+        }
         
-        presence.assets.smallImage = item.isPaused ? "paused" : "playing"
-        presence.assets.smallText = playbackStateText
+        presence.largeText = PresentiText(text: item.title)
+        presence.smallTexts = texts
+        presence.timestamps = PresentiTimeRange(start: item.start?.millisecondsSince1970, stop: item.stop?.millisecondsSince1970, effective: Date().millisecondsSince1970)
         
         return presence
     }
 }
 
-extension NowPlayingManager: SwordRPCDelegate {
-    func swordRPCDidConnect(_ rpc: SwordRPC) {
-        print("Connected to Discord!")
+extension NowPlayingManager: PresentiRPCDelegate {
+    func rpcDidConnect() {
+        print("Connected to Presenti!")
+        print(PreferencesManager.shared.reloadInterval)
         DispatchQueue.main.async {
-            StatusItemManager.shared.isConnectedToDiscord = true
+            StatusItemManager.shared.isConnectedToPresenti = true
             self.updateState()
-            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
+            self.timer = Timer.scheduledTimer(timeInterval: PreferencesManager.shared.reloadInterval, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
         }
     }
     
-    func swordRPCDidDisconnect(_ rpc: SwordRPC, code: Int?, message msg: String?) {
-        print("Lost Discord connection :(")
+    func rpcDidDisconnect() {
+        print("Lost Presenti connection :(")
         DispatchQueue.main.async {
-            StatusItemManager.shared.isConnectedToDiscord = false
+            StatusItemManager.shared.isConnectedToPresenti = false
             self.timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.setup), userInfo: nil, repeats: true)
             self.setup()
+        }
+    }
+}
+
+extension NowPlayingManager: PreferencesManagerDelegate {
+    func tokenDidChange(token: String?) {
+        self.rpc.token = token
+    }
+    
+    func reloadIntervalDidChange(interval: Double) {
+        self.timer?.invalidate()
+        DispatchQueue.main.async {
+            self.timer = Timer.scheduledTimer(timeInterval: PreferencesManager.shared.reloadInterval, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
         }
     }
 }

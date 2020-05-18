@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ScriptingBridge/ScriptingBridge.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MusicBridge : NSObject
 - (NSDictionary<NSString *, NSObject *> *)currentTrackInfo;
+- (NSDictionary*) currentTrackArtwork;
 - (BOOL)isPaused;
 - (double)playerPosition;
 @end

@@ -3,10 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D1E34572471FD4E00796902 /* NSImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E34562471FD4E00796902 /* NSImage+Resize.swift */; };
+		1D1E345A247210AA00796902 /* Date+Milliseconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E3459247210AA00796902 /* Date+Milliseconds.swift */; };
+		1D1E345D24722CF300796902 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E345C24722CF300796902 /* PreferencesView.swift */; };
+		1D1E345F24722EB300796902 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E345E24722EB300796902 /* PreferencesWindowController.swift */; };
+		1D1E34612472358000796902 /* PreferencesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1E34602472358000796902 /* PreferencesManager.swift */; };
+		1D59EBCE2470D0370036C5D3 /* PresentiConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59EBCD2470D0370036C5D3 /* PresentiConnection.swift */; };
+		1D59EBD72471B6D90036C5D3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59EBD62471B6D90036C5D3 /* Event.swift */; };
+		1D59EBD92471B7580036C5D3 /* EID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59EBD82471B7580036C5D3 /* EID.swift */; };
+		1D59EBDB2471B8AB0036C5D3 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59EBDA2471B8AB0036C5D3 /* Types.swift */; };
+		1D59EBE22471E3730036C5D3 /* PresentiRPCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D59EBE12471E3730036C5D3 /* PresentiRPCDelegate.swift */; };
 		C3FFC07A246F7BD200E437BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC079246F7BD200E437BD /* AppDelegate.swift */; };
 		C3FFC07E246F7BD400E437BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3FFC07D246F7BD400E437BD /* Assets.xcassets */; };
 		C3FFC08D246F7C0C00E437BD /* NowPlaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC08C246F7C0C00E437BD /* NowPlaying.swift */; };
@@ -14,10 +24,19 @@
 		C3FFC097246F826300E437BD /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC096246F826300E437BD /* main.swift */; };
 		C3FFC0A3246FA48900E437BD /* NowPlayingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC0A2246FA48900E437BD /* NowPlayingManager.swift */; };
 		C3FFC0A5246FA59B00E437BD /* StatusItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FFC0A4246FA59B00E437BD /* StatusItemManager.swift */; };
-		C3FFC0A8246FAE7F00E437BD /* SwordRPC in Frameworks */ = {isa = PBXBuildFile; productRef = C3FFC0A7246FAE7F00E437BD /* SwordRPC */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D1E34562471FD4E00796902 /* NSImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Resize.swift"; sourceTree = "<group>"; };
+		1D1E3459247210AA00796902 /* Date+Milliseconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Milliseconds.swift"; sourceTree = "<group>"; };
+		1D1E345C24722CF300796902 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		1D1E345E24722EB300796902 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		1D1E34602472358000796902 /* PreferencesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesManager.swift; sourceTree = "<group>"; };
+		1D59EBCD2470D0370036C5D3 /* PresentiConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentiConnection.swift; sourceTree = "<group>"; };
+		1D59EBD62471B6D90036C5D3 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		1D59EBD82471B7580036C5D3 /* EID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EID.swift; sourceTree = "<group>"; };
+		1D59EBDA2471B8AB0036C5D3 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		1D59EBE12471E3730036C5D3 /* PresentiRPCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentiRPCDelegate.swift; sourceTree = "<group>"; };
 		C3FFC076246F7BD200E437BD /* Discord-Apple Music Rich Presence.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Discord-Apple Music Rich Presence.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3FFC079246F7BD200E437BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3FFC07D246F7BD400E437BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,13 +57,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3FFC0A8246FAE7F00E437BD /* SwordRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D1E34582472109B00796902 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1D1E34562471FD4E00796902 /* NSImage+Resize.swift */,
+				1D1E3459247210AA00796902 /* Date+Milliseconds.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1D1E345B24722CE400796902 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				1D1E345C24722CF300796902 /* PreferencesView.swift */,
+				1D1E345E24722EB300796902 /* PreferencesWindowController.swift */,
+				1D1E34602472358000796902 /* PreferencesManager.swift */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		1D59EBD52471B6D10036C5D3 /* Presenti */ = {
+			isa = PBXGroup;
+			children = (
+				1D59EBD62471B6D90036C5D3 /* Event.swift */,
+				1D59EBD82471B7580036C5D3 /* EID.swift */,
+				1D59EBDA2471B8AB0036C5D3 /* Types.swift */,
+				1D59EBE12471E3730036C5D3 /* PresentiRPCDelegate.swift */,
+			);
+			path = Presenti;
+			sourceTree = "<group>";
+		};
 		C3FFC06D246F7BD200E437BD = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +113,9 @@
 		C3FFC078246F7BD200E437BD /* AppleMusicRPC */ = {
 			isa = PBXGroup;
 			children = (
+				1D1E345B24722CE400796902 /* Preferences */,
+				1D1E34582472109B00796902 /* Extensions */,
+				1D59EBD52471B6D10036C5D3 /* Presenti */,
 				C3FFC079246F7BD200E437BD /* AppDelegate.swift */,
 				C3FFC0A4246FA59B00E437BD /* StatusItemManager.swift */,
 				C3FFC08C246F7C0C00E437BD /* NowPlaying.swift */,
@@ -77,6 +128,7 @@
 				C3FFC092246F80F900E437BD /* MusicAPI.h */,
 				C3FFC08E246F7F7300E437BD /* AppleMusicRPC-Bridging-Header.h */,
 				C3FFC096246F826300E437BD /* main.swift */,
+				1D59EBCD2470D0370036C5D3 /* PresentiConnection.swift */,
 			);
 			path = AppleMusicRPC;
 			sourceTree = "<group>";
@@ -105,7 +157,6 @@
 			);
 			name = "Discord-Apple Music Rich Presence";
 			packageProductDependencies = (
-				C3FFC0A7246FAE7F00E437BD /* SwordRPC */,
 			);
 			productName = AppleMusicRPC;
 			productReference = C3FFC076246F7BD200E437BD /* Discord-Apple Music Rich Presence.app */;
@@ -137,7 +188,6 @@
 			);
 			mainGroup = C3FFC06D246F7BD200E437BD;
 			packageReferences = (
-				C3FFC0A6246FAE7F00E437BD /* XCRemoteSwiftPackageReference "SwordRPC" */,
 			);
 			productRefGroup = C3FFC077246F7BD200E437BD /* Products */;
 			projectDirPath = "";
@@ -164,12 +214,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D1E34612472358000796902 /* PreferencesManager.swift in Sources */,
+				1D59EBD72471B6D90036C5D3 /* Event.swift in Sources */,
+				1D59EBE22471E3730036C5D3 /* PresentiRPCDelegate.swift in Sources */,
+				1D1E345A247210AA00796902 /* Date+Milliseconds.swift in Sources */,
+				1D59EBD92471B7580036C5D3 /* EID.swift in Sources */,
+				1D59EBCE2470D0370036C5D3 /* PresentiConnection.swift in Sources */,
+				1D1E34572471FD4E00796902 /* NSImage+Resize.swift in Sources */,
+				1D59EBDB2471B8AB0036C5D3 /* Types.swift in Sources */,
 				C3FFC0A5246FA59B00E437BD /* StatusItemManager.swift in Sources */,
 				C3FFC095246F817000E437BD /* MusicBridge.m in Sources */,
 				C3FFC07A246F7BD200E437BD /* AppDelegate.swift in Sources */,
 				C3FFC0A3246FA48900E437BD /* NowPlayingManager.swift in Sources */,
 				C3FFC097246F826300E437BD /* main.swift in Sources */,
+				1D1E345F24722EB300796902 /* PreferencesWindowController.swift in Sources */,
 				C3FFC08D246F7C0C00E437BD /* NowPlaying.swift in Sources */,
+				1D1E345D24722CF300796902 /* PreferencesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,13 +357,14 @@
 				CODE_SIGN_ENTITLEMENTS = AppleMusicRPC/AppleMusicRPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RHEEZ26ZWB;
+				DEVELOPMENT_TEAM = 6UW2D7F2RU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AppleMusicRPC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.ayden.macos.music-rpc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AppleMusicRPC/AppleMusicRPC-Bridging-Header.h";
@@ -320,13 +381,14 @@
 				CODE_SIGN_ENTITLEMENTS = AppleMusicRPC/AppleMusicRPC.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = RHEEZ26ZWB;
+				DEVELOPMENT_TEAM = 6UW2D7F2RU;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = AppleMusicRPC/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.ayden.macos.music-rpc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AppleMusicRPC/AppleMusicRPC-Bridging-Header.h";
@@ -356,25 +418,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		C3FFC0A6246FAE7F00E437BD /* XCRemoteSwiftPackageReference "SwordRPC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aydenp/SwordRPC";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		C3FFC0A7246FAE7F00E437BD /* SwordRPC */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C3FFC0A6246FAE7F00E437BD /* XCRemoteSwiftPackageReference "SwordRPC" */;
-			productName = SwordRPC;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C3FFC06E246F7BD200E437BD /* Project object */;
 }

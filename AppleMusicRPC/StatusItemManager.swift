@@ -13,31 +13,71 @@ class StatusItemManager {
     
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let discordStatusMenuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
+    private let connectItem = NSMenuItem(title: "Connect", action: #selector(StatusItemManager.connect(_:)), keyEquivalent: "c")
+    private let disconnectItem = NSMenuItem(title: "Disconnect", action: #selector(StatusItemManager.disconnect(_:)), keyEquivalent: "d")
+    private let reconnectItem = NSMenuItem(title: "Reconnect", action: #selector(StatusItemManager.reconnect(_:)), keyEquivalent: "r")
     
     private init() {
-        statusItem.button?.title = "Apple Music Discord Status"
+        statusItem.button?.title = "Apple Music Presenti Status"
         
         let menu = NSMenu()
         menu.addItem(discordStatusMenuItem)
         menu.addItem(.separator())
+        menu.autoenablesItems = false
+        
+        discordStatusMenuItem.isEnabled = false
+        
+        let prefsItem = NSMenuItem(title: "Preferences", action: #selector(showPreferences(_:)), keyEquivalent: ",")
+        prefsItem.target = self
+        menu.addItem(prefsItem)
+        
+        connectItem.target = self
+        menu.addItem(connectItem)
+        
+        disconnectItem.target = self
+        menu.addItem(disconnectItem)
+        
+        reconnectItem.target = self
+        menu.addItem(reconnectItem)
+        
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem.menu = menu
         
         defer {
-            isConnectedToDiscord = false
+            isConnectedToPresenti = false
             updateIcon()
         }
+    }
+    
+    @objc func showPreferences(_ sender: NSMenuItem) {
+        PreferencesWindowController().showWindow()
+    }
+    
+    @objc func disconnect(_ sender: NSMenuItem) {
+        NowPlayingManager.shared.rpc.close()
+    }
+    
+    @objc func connect(_ sender: NSMenuItem) {
+        NowPlayingManager.shared.rpc.connect(forced: true)
+    }
+    
+    @objc func reconnect(_ sender: NSMenuItem) {
+        NowPlayingManager.shared.rpc.close(reconnect: true)
     }
     
     func setup() {}
     
     private func updateIcon() {
-        statusItem.button?.image = NSImage(named: "StatusItem_\(isConnectedToDiscord ? iconState.imageSuffix : "disabled")")
+        statusItem.button?.image = NSImage(named: "StatusItem_\(isConnectedToPresenti ? iconState.imageSuffix : "disabled")")
+        
+        disconnectItem.isEnabled = isConnectedToPresenti
+        reconnectItem.isEnabled = isConnectedToPresenti
+        connectItem.isEnabled = !isConnectedToPresenti
     }
     
-    var isConnectedToDiscord = false {
+    var isConnectedToPresenti = false {
         didSet {
-            discordStatusMenuItem.title = "\(isConnectedToDiscord ? "" : "Not ")Connected to Discord"
+            discordStatusMenuItem.title = "\(isConnectedToPresenti ? "" : "Not ")Connected to Presenti"
             updateIcon()
         }
     }
