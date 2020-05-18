@@ -11,6 +11,8 @@ import Foundation
 protocol PreferencesManagerDelegate {
     func tokenDidChange(token: String?)
     func reloadIntervalDidChange(interval: Double)
+    func gradientEnabledDidChange(enabled: Bool)
+    func gradientPriorityDidChange(priority: Int)
 }
 
 class PreferencesManager {
@@ -77,8 +79,29 @@ class PreferencesManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "reload-interval")
-            print("reload interval changed")
             self.delegate?.reloadIntervalDidChange(interval: newValue)
+        }
+    }
+    
+    var gradientEnabled: Bool {
+        get {
+            let enabled = UserDefaults.standard.bool(forKey: "gradient-enabled") as Bool? ?? false
+            return enabled
+        }
+        set {
+            print(newValue)
+            UserDefaults.standard.set(newValue, forKey: "gradient-enabled")
+            self.delegate?.gradientEnabledDidChange(enabled: newValue)
+        }
+    }
+    
+    var gradientPriority: Int {
+        get {
+            return Int(UserDefaults.standard.double(forKey: "gradient-priority") as Double? ?? 1.0)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "gradient-priority")
+            self.delegate?.gradientPriorityDidChange(priority: newValue)
         }
     }
 }

@@ -21,14 +21,9 @@ class StatusItemManager {
         
         let menu = NSMenu()
         menu.addItem(discordStatusMenuItem)
-        menu.addItem(.separator())
         menu.autoenablesItems = false
         
         discordStatusMenuItem.isEnabled = false
-        
-        let prefsItem = NSMenuItem(title: "Preferences", action: #selector(showPreferences(_:)), keyEquivalent: ",")
-        prefsItem.target = self
-        menu.addItem(prefsItem)
         
         connectItem.target = self
         menu.addItem(connectItem)
@@ -37,6 +32,14 @@ class StatusItemManager {
         reconnectItem.isAlternate = true
         reconnectItem.keyEquivalentModifierMask = [.command, .option]
         menu.addItem(reconnectItem)
+        
+        menu.addItem(.separator())
+        
+        let prefsItem = NSMenuItem(title: "Preferences", action: #selector(showPreferences(_:)), keyEquivalent: ",")
+        prefsItem.target = self
+        menu.addItem(prefsItem)
+        
+        menu.addItem(.separator())
         
         menu.addItem(withTitle: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
         statusItem.menu = menu

@@ -25,10 +25,10 @@ class NowPlayingManager {
         rpc.connect()
     }
     
-    @objc private func updateState() {
+    @objc private func updateState(force: Bool = false) {
         if NowPlaying.changed == false {
-            print("no change")
-            return
+            print("no change. force: \(force)")
+            if force == false { return }
         }
         
         let item = NowPlaying.current
@@ -38,6 +38,7 @@ class NowPlayingManager {
         guard let presence = getPresence(forItem: item) else {
             return
         }
+        
         rpc.setPresence(presence)
     }
     
@@ -89,6 +90,12 @@ class NowPlayingManager {
         presence.smallTexts = texts
         presence.timestamps = PresentiTimeRange(start: item.start?.millisecondsSince1970, stop: item.stop?.millisecondsSince1970, effective: Date().millisecondsSince1970)
         
+        
+        presence.gradient = PreferencesManager.shared.gradientEnabled ? PresentiGradient(
+            enabled: PreferencesManager.shared.gradientEnabled,
+            priority: PreferencesManager.shared.gradientPriority
+        ) : nil
+        
         return presence
     }
 }
@@ -99,8 +106,10 @@ extension NowPlayingManager: PresentiRPCDelegate {
         print(PreferencesManager.shared.reloadInterval)
         DispatchQueue.main.async {
             StatusItemManager.shared.isConnectedToPresenti = true
-            self.updateState()
-            self.timer = Timer.scheduledTimer(timeInterval: PreferencesManager.shared.reloadInterval, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
+            self.updateState(force: true)
+            self.timer = Timer.scheduledTimer(withTimeInterval: PreferencesManager.shared.reloadInterval, repeats: true) { timer in
+                self.updateState(force: false)
+            }
         }
     }
     
@@ -124,5 +133,13 @@ extension NowPlayingManager: PreferencesManagerDelegate {
         DispatchQueue.main.async {
             self.timer = Timer.scheduledTimer(timeInterval: PreferencesManager.shared.reloadInterval, target: self, selector: #selector(self.updateState), userInfo: nil, repeats: true)
         }
+    }
+    
+    func gradientEnabledDidChange(enabled: Bool) {
+        
+    }
+    
+    func gradientPriorityDidChange(priority: Int) {
+        
     }
 }
