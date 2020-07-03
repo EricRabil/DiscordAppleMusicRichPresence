@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwordRPC
 
 class NowPlayingManager {
     static let shared = NowPlayingManager()
